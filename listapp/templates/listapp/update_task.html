@@ -1,0 +1,25 @@
+{% extends 'listapp/base.html' %}
+
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <form method="post">
+
+      {{ form.non_field_errors }}
+
+      {% csrf_token %}
+
+      {% for f in form %}
+        <div class="form-outline mb-4">
+          {{ f }}
+          <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
+        </div>
+      {% endfor %}
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
+    </form>
+  {% else %}
+    <h3>You need <a href="{% url 'login' %}">login</a> first to update some task!!!</h3>
+  {% endif %}
+{% endblock %}

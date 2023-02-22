@@ -1,0 +1,17 @@
+{% extends 'listapp/base.html' %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1><b>Task created by:</b> {{ user }}<br></h1>
+    <p><small>{{ task.time_created }}</small></p>
+    <p class="fs-3"><b>Title of task:</b> {{ task.title }}</p>
+    <p class="fs-3"><b>Task description:</b> {{ task.description }}</p>
+    {% if task.is_complete %}
+      <p class="fs-3"><b>Status:</b> Task is complete successfull!</p>
+    {% else %}
+      <p class="fs-3"><b>Status:</b> You need complete this task!</p>
+    {% endif %}
+  {% else %}
+    <h3>Please <a href="{% url 'login' %}">login</a> to view your task!!!</h3>
+  {% endif %}
+{% endblock %}
